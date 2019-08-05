@@ -1,0 +1,13 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/spfx-build/package-solution.schema.json",
+  "solution": {
+    "name": "garbuz-calendar-web-parts-client-side-solution",
+    "id": "979eb90d-3c8d-419a-8306-2d9e51b3604e",
+    "version": "1.0.0.0",
+    "includeClientSideAssets": true,
+    "isDomainIsolated": false
+  },
+  "paths": {
+    "zippedPackage": "solution/garbuz-calendar-web-parts.sppkg"
+  }
+}

@@ -1,0 +1,18 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/spfx-build/config.2.0.schema.json",
+  "version": "2.0",
+  "bundles": {
+    "load-data-from-graph-web-part": {
+      "components": [
+        {
+          "entrypoint": "./lib/webparts/loadDataFromGraph/LoadDataFromGraphWebPart.js",
+          "manifest": "./src/webparts/loadDataFromGraph/LoadDataFromGraphWebPart.manifest.json"
+        }
+      ]
+    }
+  },
+  "externals": {},
+  "localizedResources": {
+    "LoadDataFromGraphWebPartStrings": "lib/webparts/loadDataFromGraph/loc/{locale}.js"
+  }
+}
