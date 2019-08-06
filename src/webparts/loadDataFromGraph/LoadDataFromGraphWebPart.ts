@@ -28,17 +28,18 @@ export default class LoadDataFromGraphWebPart extends BaseClientSideWebPart<
   public onInit(): Promise<void> {
     return super.onInit().then(_ => {
       this.loadMe()
-        .then(_ => this.loadCalendars())
-        .then(_ => this.render());
+        .then(() => this.loadCalendars())
+        .then(() => this.render());
     });
   }
+
   public render(): void {
     const element: React.ReactElement<
       ILoadDataFromGraphProps
     > = React.createElement(LoadDataFromGraph, {
       user: this.properties.user,
       email: this.properties.email,
-      calendars: this.properties.calendars
+      calendars: this.properties.calendars || []
     });
 
     ReactDom.render(element, this.domElement);
@@ -58,7 +59,6 @@ export default class LoadDataFromGraphWebPart extends BaseClientSideWebPart<
         client
           .api("/me")
           .get((error, user: MicrosoftGraph.User, rawResponse?: any) => {
-            // handle the response
             if (user) {
               console.log(user);
               this.properties.user = user.displayName;

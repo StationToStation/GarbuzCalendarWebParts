@@ -14,13 +14,25 @@ export default class LoadDataFromGraph extends React.Component<
     super(props);
     console.log(props);
   }
+
+  public componentDidUpdate(prevProps: ILoadDataFromGraphProps, prevState: {}) {
+    for (var key in prevProps) {
+      if (prevProps[key] !== this.props[key]) {
+        this.forceUpdate();
+        break;
+      }
+    }
+  }
+
   public render(): React.ReactElement<ILoadDataFromGraphProps> {
     return (
       <div className={styles.loadDataFromGraph}>
         <div className={styles.container}>
           <span className={styles.title}>{escape(this.props.user)}</span>
-          <p className={styles.email}>{strings.Email + escape(this.props.email)}</p>
-          <Dropdown options={this.props.calendars}></Dropdown>
+          <p className={styles.email}>
+            {strings.Email + escape(this.props.email)}
+          </p>
+          <Dropdown options={this.props.calendars} />
         </div>
       </div>
     );

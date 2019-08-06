@@ -1,0 +1,21 @@
+.calendarData {
+  .container {
+    background-color: "[theme: neutralLighterAlt, default: #f8f8f8]";
+    max-width: 700px;
+    margin: 0px auto;
+    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2), 0 25px 50px 0 rgba(0, 0, 0, 0.1);
+    padding: 2em;
+  }
+
+  .title {
+    font-size: 1.618em;
+    color: "[theme: themePrimary, default: #4052ab]";
+  }
+
+  .eventsContainer {
+    margin-top: 1.618em;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+}

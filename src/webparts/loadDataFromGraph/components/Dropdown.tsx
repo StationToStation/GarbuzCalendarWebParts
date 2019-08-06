@@ -34,7 +34,6 @@ export default class DropdownControlled extends React.Component<
         onChange={this._onChange}
         placeholder={strings.SelectCalendar}
         options={this.props.options.map(option => {
-          console.log(option);
           return {
             key: option.id,
             text: option.name

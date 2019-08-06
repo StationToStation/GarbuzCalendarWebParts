@@ -1,0 +1,18 @@
+.eventItem {
+  .container {
+    max-width: 180px;
+    background-color: "[theme: white, default: #ffffff]";
+    padding: 1em;
+    height: 10em;
+    display: grid;
+    grid-template-columns: 1fr 1.8fr;
+    grid-template-rows: 1fr;
+    grid-template-areas: ". .";
+  }
+
+  .title {
+    margin-top: 0;
+    padding: 0.5em;
+    color: "[theme: black, default: #000000]";
+  }
+}

@@ -9,10 +9,19 @@
           "manifest": "./src/webparts/loadDataFromGraph/LoadDataFromGraphWebPart.manifest.json"
         }
       ]
+    },
+    "calendar-data-web-part": {
+      "components": [
+        {
+          "entrypoint": "./lib/webparts/calendarData/CalendarDataWebPart.js",
+          "manifest": "./src/webparts/calendarData/CalendarDataWebPart.manifest.json"
+        }
+      ]
     }
   },
   "externals": {},
   "localizedResources": {
-    "LoadDataFromGraphWebPartStrings": "lib/webparts/loadDataFromGraph/loc/{locale}.js"
+    "LoadDataFromGraphWebPartStrings": "lib/webparts/loadDataFromGraph/loc/{locale}.js",
+    "CalendarDataWebPartStrings": "lib/webparts/calendarData/loc/{locale}.js"
   }
 }
