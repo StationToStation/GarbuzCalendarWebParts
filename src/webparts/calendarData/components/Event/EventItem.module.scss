@@ -8,11 +8,43 @@
     grid-template-columns: 1fr 1.8fr;
     grid-template-rows: 1fr;
     grid-template-areas: ". .";
+
+  }
+
+  .row {
+    overflow: hidden;
   }
 
   .title {
-    margin-top: 0;
-    padding: 0.5em;
+    font-size: 1em;
+    padding: 0;
+    padding-left: 0.5em;
     color: "[theme: black, default: #000000]";
+    max-height: 2.5em;
+    overflow: hidden;
+  }
+
+  .day {
+    font-size: 4em;
+    margin: 0;
+  }
+
+  .month {
+    font-size: 2em;
+    margin: 0;
+  }
+
+  .time {
+    padding: 0;
+    padding-left: 0.5em;
+    margin: 0;
+    color: "[theme: neutralSecondary, default: #666666]";
+  }
+
+  .location {
+    padding: 0;
+    padding-left: 0.5em;
+    margin: 0;
+    color: "[theme: neutralSecondary, default: #666666]";
   }
 }
