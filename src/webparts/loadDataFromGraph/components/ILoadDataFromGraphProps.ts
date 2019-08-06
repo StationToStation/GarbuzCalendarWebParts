@@ -1,3 +1,7 @@
+import Calendar from "../ICalendar";
+
 export interface ILoadDataFromGraphProps {
-  description: string;
+  user: string;
+  email: string;
+  calendars: Calendar[];
 }

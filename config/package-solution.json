@@ -5,7 +5,25 @@
     "id": "979eb90d-3c8d-419a-8306-2d9e51b3604e",
     "version": "1.0.0.0",
     "includeClientSideAssets": true,
-    "isDomainIsolated": false
+    "isDomainIsolated": false,
+    "webApiPermissionRequests": [
+      {
+        "resource": "Microsoft Graph",
+        "scope": "User.Read"
+      },
+      {
+        "resource": "Microsoft Graph",
+        "scope": "Files.Read"
+      },
+      {
+        "resource": "Microsoft Graph",
+        "scope": "Mail.Read"
+      },
+      {
+        "resource": "Microsoft Graph",
+        "scope": "Calendars.Read"
+      }
+    ]
   },
   "paths": {
     "zippedPackage": "solution/garbuz-calendar-web-parts.sppkg"
