@@ -28,7 +28,10 @@ export default class CalendarDataWebPart extends BaseClientSideWebPart<
   ICalendarDataWebPartProps
 > {
   public top = 3;
+  public notConnectedID: string;
   public onInit(): Promise<void> {
+    if (this.properties.calendarID)
+      this.notConnectedID = this.properties.calendarID;
     return super.onInit().then(() => {
       this.loadEvents()
         .then(() => {
@@ -120,7 +123,14 @@ export default class CalendarDataWebPart extends BaseClientSideWebPart<
     if (propertyPath === "connected") {
       if (!window["observer"]) window["observer"] = new EventObserver();
       if (newValue) window["observer"].subscribe(this.connect);
-      else window["observer"].unsubscribe(this.connect);
+      else {
+        window["observer"].unsubscribe(this.connect);
+        this.properties.calendarID = this.notConnectedID;
+      }
+    }
+    if (propertyPath === "calendarID" && this.properties.connected === false) {
+      console.log(newValue);
+      this.notConnectedID = newValue;
     }
   }
 
