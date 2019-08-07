@@ -12,6 +12,15 @@ export default class CalendarData extends React.Component<
     super(props);
   }
 
+  public componentDidUpdate(prevProps: ICalendarDataProps, prevState: {}) {
+    for (var key in prevProps) {
+      if (prevProps[key] !== this.props[key]) {
+        this.setState({});
+        break;
+      }
+    }
+  }
+
   public render(): React.ReactElement<ICalendarDataProps> {
     return (
       <div className={styles.calendarData}>

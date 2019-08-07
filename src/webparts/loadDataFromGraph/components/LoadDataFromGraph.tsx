@@ -10,11 +10,6 @@ export default class LoadDataFromGraph extends React.Component<
   ILoadDataFromGraphProps,
   {}
 > {
-  constructor(props: ILoadDataFromGraphProps) {
-    super(props);
-    console.log(props);
-  }
-
   public componentDidUpdate(prevProps: ILoadDataFromGraphProps, prevState: {}) {
     for (var key in prevProps) {
       if (prevProps[key] !== this.props[key]) {
@@ -32,7 +27,10 @@ export default class LoadDataFromGraph extends React.Component<
           <p className={styles.email}>
             {strings.Email + escape(this.props.email)}
           </p>
-          <Dropdown options={this.props.calendars} />
+          <Dropdown
+            options={this.props.calendars}
+            onChange={this.props.onChange}
+          />
         </div>
       </div>
     );

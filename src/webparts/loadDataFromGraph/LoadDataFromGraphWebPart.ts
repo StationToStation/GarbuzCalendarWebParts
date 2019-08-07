@@ -14,6 +14,8 @@ import LoadDataFromGraph from "./components/LoadDataFromGraph";
 import { ILoadDataFromGraphProps } from "./components/ILoadDataFromGraphProps";
 import Calendar from "./ICalendar";
 
+import EventObserver from "./Observer";
+
 export interface ILoadDataFromGraphWebPartProps {
   user: string;
   email: string;
@@ -30,6 +32,7 @@ export default class LoadDataFromGraphWebPart extends BaseClientSideWebPart<
       this.loadMe()
         .then(() => this.loadCalendars())
         .then(() => this.render());
+      if (!window["observer"]) window["observer"] = new EventObserver();
     });
   }
 
@@ -39,11 +42,16 @@ export default class LoadDataFromGraphWebPart extends BaseClientSideWebPart<
     > = React.createElement(LoadDataFromGraph, {
       user: this.properties.user,
       email: this.properties.email,
-      calendars: this.properties.calendars || []
+      calendars: this.properties.calendars || [],
+      onChange: this.onChange
     });
 
     ReactDom.render(element, this.domElement);
   }
+
+  public onChange = (ID: string) => {
+    window["observer"].broadcast(ID);
+  };
 
   protected onDispose(): void {
     ReactDom.unmountComponentAtNode(this.domElement);
@@ -60,7 +68,6 @@ export default class LoadDataFromGraphWebPart extends BaseClientSideWebPart<
           .api("/me")
           .get((error, user: MicrosoftGraph.User, rawResponse?: any) => {
             if (user) {
-              console.log(user);
               this.properties.user = user.displayName;
               this.properties.email = user.mail;
             }
@@ -77,7 +84,6 @@ export default class LoadDataFromGraphWebPart extends BaseClientSideWebPart<
           .api("/me/calendars")
           .get((error, response, rawResponse?: any) => {
             if (response) {
-              console.log(response);
               this.properties.calendars = response.value.map(calendar => {
                 return {
                   id: calendar.id,
@@ -95,12 +101,8 @@ export default class LoadDataFromGraphWebPart extends BaseClientSideWebPart<
     return {
       pages: [
         {
-          header: {
-            description: strings.PropertyPaneDescription
-          },
           groups: [
             {
-              groupName: strings.BasicGroupName,
               groupFields: [
                 PropertyPaneTextField("description", {
                   label: strings.DescriptionFieldLabel

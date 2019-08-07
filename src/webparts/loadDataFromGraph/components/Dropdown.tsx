@@ -8,8 +8,11 @@ import {
 import * as strings from "LoadDataFromGraphWebPartStrings";
 import Calendar from "../ICalendar";
 
+import EventObserver from "../Observer";
+
 interface IDropdownControlledProps {
   options: Calendar[];
+  onChange: Function;
 }
 
 interface IDropdownControlledState {
@@ -48,11 +51,6 @@ export default class DropdownControlled extends React.Component<
     event: React.FormEvent<HTMLDivElement>,
     item: IDropdownOption
   ): void => {
-    console.log(
-      `Selection change: ${item.text} ${
-        item.selected ? "selected" : "unselected"
-      }`
-    );
-    this.setState({ selectedItem: item });
+    this.props.onChange(item.key);
   };
 }

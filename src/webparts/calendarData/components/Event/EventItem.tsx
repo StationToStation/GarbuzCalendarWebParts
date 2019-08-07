@@ -25,10 +25,8 @@ export default class EventItem extends React.Component<Event, {}> {
 
   public constructor(props: Event) {
     super(props);
-    console.log(props);
     this.start = new Date(this.props.start);
     let hours = this.start.getHours();
-    console.log(hours-12);
     switch (hours) {
       case 0:
         this.time = "12";
@@ -51,14 +49,10 @@ export default class EventItem extends React.Component<Event, {}> {
         this.time = hours - 12 + "";
     }
     this.time =
-      this.start.getHours() === 0
-        ? "12"
-        : this.start.getHours().toString();
+      this.start.getHours() === 0 ? "12" : this.start.getHours().toString();
     this.time += ":";
     this.time +=
-      this.start.getMinutes() === 0
-        ? "00"
-        : this.start.getMinutes().toString();
+      this.start.getMinutes() === 0 ? "00" : this.start.getMinutes().toString();
     if (this.start.getHours() < 12) this.time += " AM";
     else this.time += " PM";
   }
@@ -69,7 +63,9 @@ export default class EventItem extends React.Component<Event, {}> {
         <div className={styles.container}>
           <div className={styles.row}>
             <p className={styles.day}>{this.start.getDate()}</p>
-            <p className={styles.month}>{this.months[this.start.getMonth()].toUpperCase()}</p>
+            <p className={styles.month}>
+              {this.months[this.start.getMonth()].toUpperCase()}
+            </p>
           </div>
           <div className={styles.row}>
             <p className={styles.time}>{this.time}</p>

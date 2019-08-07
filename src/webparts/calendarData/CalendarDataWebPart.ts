@@ -15,6 +15,8 @@ import CalendarData from "./components/CalendarData";
 import { ICalendarDataProps } from "./components/ICalendarDataProps";
 import Event from "./components/IEvent";
 
+import EventObserver from "../loadDataFromGraph/Observer";
+
 export interface ICalendarDataWebPartProps {
   calendarID: string;
   connected: boolean;
@@ -32,7 +34,11 @@ export default class CalendarDataWebPart extends BaseClientSideWebPart<
         .then(() => {
           this.loadCalendarName();
         })
-        .then(() => this.render());
+        .then(this.render);
+      if (this.properties.connected) {
+        if (!window["observer"]) window["observer"] = new EventObserver();
+        window["observer"].subscribe(this.connect);
+      }
     });
   }
 
@@ -88,7 +94,6 @@ export default class CalendarDataWebPart extends BaseClientSideWebPart<
           )
           .get((error, events, rawResponse?: any) => {
             if (events) {
-              console.log(events);
               this.properties.events = events.value.map(
                 (event: MicrosoftGraph.Event) => {
                   return {
@@ -107,7 +112,31 @@ export default class CalendarDataWebPart extends BaseClientSideWebPart<
     );
   }
 
-  //onPropertyPaneFieldChanged(propertyPath, oldValue, newValue) {}
+  protected onPropertyPaneFieldChanged(
+    propertyPath: string,
+    oldValue,
+    newValue
+  ) {
+    if (propertyPath === "connected") {
+      if (!window["observer"]) window["observer"] = new EventObserver();
+      if (newValue) window["observer"].subscribe(this.connect);
+      else window["observer"].unsubscribe(this.connect);
+    }
+  }
+
+  public connect = async data => {
+    this.properties.calendarID = data;
+    this.loadEvents()
+      .then(() => {
+        this.loadCalendarName();
+      })
+      .then(() =>
+        //да, это плохо, я знаю, поправлю, если нужно
+        setTimeout(() => {
+          this.render();
+        }, 1000)
+      );
+  };
 
   protected getPropertyPaneConfiguration(): IPropertyPaneConfiguration {
     return {
