@@ -52,5 +52,5 @@ export default class DropdownControlled extends React.Component<
     item: IDropdownOption
   ): void => {
     this.props.onChange(item.key);
-  };
+  }
 }

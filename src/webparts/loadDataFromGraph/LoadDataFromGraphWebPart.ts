@@ -51,7 +51,7 @@ export default class LoadDataFromGraphWebPart extends BaseClientSideWebPart<
 
   public onChange = (ID: string) => {
     window["observer"].broadcast(ID);
-  };
+  }
 
   protected onDispose(): void {
     ReactDom.unmountComponentAtNode(this.domElement);

@@ -146,7 +146,7 @@ export default class CalendarDataWebPart extends BaseClientSideWebPart<
           this.render();
         }, 1000)
       );
-  };
+  }
 
   protected getPropertyPaneConfiguration(): IPropertyPaneConfiguration {
     return {
